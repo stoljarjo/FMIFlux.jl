@@ -62,7 +62,7 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Jupyter nbconvert synch - modified, paired .ipynb files
-        skip_checkout: true
+        skip_checkout: false
         
   build:
     needs: sync-jupyter
