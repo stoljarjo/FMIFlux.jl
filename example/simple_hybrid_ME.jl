@@ -28,7 +28,9 @@ fmiPlot(realSimData)
 
 velReal = fmi2GetSolutionValue(realSimData, "mass.v")
 posReal = fmi2GetSolutionValue(realSimData, "mass.s")
+
 fmiUnload(realFMU)
+
 simpleFMU = fmiLoad("SpringPendulum1D", "Dymola", "2022x")
 fmiInfo(simpleFMU)
 
