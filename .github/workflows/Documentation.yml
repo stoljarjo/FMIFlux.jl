@@ -8,34 +8,8 @@ on:
       - '*'
   pull_request:
 
-jobs:
-  filter:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-
-    outputs:
-      all: ${{ steps.filter.outputs.all }}
-      changed: ${{ steps.filter.outputs.changed }}
-      src: ${{ steps.filter.outputs.src }}
-
-    steps:
-    - name: "Set path filter"
-      uses: dorny/paths-filter@v2
-      id: filter
-      with:
-        list-files: shell
-        filters: |
-          all:
-            - 'example/**.ipynb'
-          changed:
-            - added|modified: 'example/**.ipynb'
-          src:
-            - 'src/**'
-            
+jobs:        
   sync-jupyter:
-    needs: filter
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
@@ -57,27 +31,40 @@ jobs:
 
     - name: "Build package"
       uses: julia-actions/julia-buildpkg@v1
-            
+
+    - name: "Set path filter"
+      uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        list-files: shell
+        filters: |
+          all:
+            - 'example/**.ipynb'
+          changed:
+            - added|modified: 'example/**.ipynb'
+          src:
+            - 'src/**'
+                
     - name: "Install Packages"
-      if: ${{ needs.filter.outputs.changed == 'true' || needs.filter.outputs.src == 'true' }}
+      if: ${{ steps.filter.outputs.changed == 'true' || steps.filter.outputs.src == 'true' }}
       run: |
         pip install jupyter==1.0.0 nbconvert==6.4.5 MarkupSafe==2.1.1 jinja2==3.1.1
         julia --project=./example/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
 
 
     - name: "Execute and synchronize all files"
-      if: ${{ needs.filter.outputs.src == 'true' }}
+      if: ${{ steps.filter.outputs.src == 'true' }}
       run: |
-        jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute ${{ needs.filter.outputs.all_files }}
-        jupyter nbconvert --to script ${{ needs.filter.outputs.all_files }}
-        jupyter nbconvert --output-dir='./docs/src/examples' --to markdown ${{ needs.filter.outputs.all_files }}
+        jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute ${{ steps.filter.outputs.all_files }}
+        jupyter nbconvert --to script ${{ steps.filter.outputs.all_files }}
+        jupyter nbconvert --output-dir='./docs/src/examples' --to markdown ${{ steps.filter.outputs.all_files }}
     
     - name: "Execute and synchronize changed files"    
-      if: ${{ needs.filter.outputs.changed == 'true' && needs.filter.outputs.src == 'false' }}
+      if: ${{ steps.filter.outputs.changed == 'true' && steps.filter.outputs.src == 'false' }}
       run: |
-        jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute ${{ needs.filter.outputs.changed_files }}
-        jupyter nbconvert --to script ${{ needs.filter.outputs.changed_files }}
-        jupyter nbconvert --output-dir='./docs/src/examples' --to markdown ${{ needs.filter.outputs.changed_files }}
+        jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute ${{ steps.filter.outputs.changed_files }}
+        jupyter nbconvert --to script ${{ steps.filter.outputs.changed_files }}
+        jupyter nbconvert --output-dir='./docs/src/examples' --to markdown ${{ steps.filter.outputs.changed_files }}
 
     - name: "Auto commit"
       uses: stefanzweifel/git-auto-commit-action@v4
