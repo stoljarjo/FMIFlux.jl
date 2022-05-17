@@ -123,9 +123,9 @@ realFMU = fmiLoad("SpringFrictionPendulum1D", "Dymola", "2022x")
 fmiInfo(realFMU)
 ```
 
-    ┌ Info: fmi2Unzip(...): Successfully unzipped 29 files at `/tmp/fmijl_ogxf99/SpringFrictionPendulum1D`.
+    ┌ Info: fmi2Unzip(...): Successfully unzipped 29 files at `/tmp/fmijl_GEmLW2/SpringFrictionPendulum1D`.
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:75
-    ┌ Info: fmi2Load(...): FMU resources location is `file:////tmp/fmijl_ogxf99/SpringFrictionPendulum1D/resources`
+    ┌ Info: fmi2Load(...): FMU resources location is `file:////tmp/fmijl_GEmLW2/SpringFrictionPendulum1D/resources`
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:190
     ┌ Info: fmi2Load(...): FMU supports both CS and ME, using CS as default if nothing specified.
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:193
@@ -268,6 +268,12 @@ simpleFMU = fmiLoad("SpringPendulum1D", "Dymola", "2022x")
 fmiInfo(simpleFMU)
 ```
 
+    ┌ Info: fmi2Unzip(...): Successfully unzipped 29 files at `/tmp/fmijl_cNOK33/SpringPendulum1D`.
+    └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:75
+    ┌ Info: fmi2Load(...): FMU resources location is `file:////tmp/fmijl_cNOK33/SpringPendulum1D/resources`
+    └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:190
+
+
     #################### Begin information for FMU ####################
     	Model name:			SpringPendulum1D
     	FMI-Version:			2.0
@@ -297,10 +303,6 @@ fmiInfo(simpleFMU)
     ##################### End information for FMU #####################
 
 
-    ┌ Info: fmi2Unzip(...): Successfully unzipped 29 files at `/tmp/fmijl_9Xxtne/SpringPendulum1D`.
-    └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:75
-    ┌ Info: fmi2Load(...): FMU resources location is `file:////tmp/fmijl_9Xxtne/SpringPendulum1D/resources`
-    └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:190
     ┌ Info: fmi2Load(...): FMU supports both CS and ME, using CS as default if nothing specified.
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:193
 
@@ -736,14 +738,14 @@ for run in 1:numRuns
     # friction model extraction
     layersBottom = neuralFMU.neuralODE.model.layers[3:5]
     netBottom = Chain(layersBottom...)
-    transferParams!(netBottom, paramsNet, 7)
+    transferFlatParams!(netBottom, paramsNet, 7)
     
     forces = plot_friction_model(realSimData, netBottom, forces) 
     
     # displacement model extraction
     layersTop = neuralFMU.neuralODE.model.layers[1:1]
     netTop = Chain(layersTop...)
-    transferParams!(netTop, paramsNet, 1)
+    transferFlatParams!(netTop, paramsNet, 1)
 
     displacements = plot_displacement_model(realSimData, netTop, displacements, tSave, displacement)
 end
@@ -961,7 +963,7 @@ end
     └ @ Main In[13]:15
 
 
-    161.824994 seconds (307.50 M allocations: 121.430 GiB, 9.18% gc time, 0.00% compilation time)
+    183.814586 seconds (306.66 M allocations: 121.402 GiB, 10.85% gc time)
 
 
 
@@ -1216,7 +1218,7 @@ end
     └ @ Main In[13]:15
 
 
-    147.108642 seconds (283.53 M allocations: 112.691 GiB, 9.37% gc time)
+    171.535971 seconds (282.69 M allocations: 112.662 GiB, 10.99% gc time)
 
 
 

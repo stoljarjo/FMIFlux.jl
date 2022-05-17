@@ -281,14 +281,14 @@ for run in 1:numRuns
     # friction model extraction
     layersBottom = neuralFMU.neuralODE.model.layers[3:5]
     netBottom = Chain(layersBottom...)
-    transferParams!(netBottom, paramsNet, 7)
+    transferFlatParams!(netBottom, paramsNet, 7)
     
     forces = plot_friction_model(realSimData, netBottom, forces) 
     
     # displacement model extraction
     layersTop = neuralFMU.neuralODE.model.layers[1:1]
     netTop = Chain(layersTop...)
-    transferParams!(netTop, paramsNet, 1)
+    transferFlatParams!(netTop, paramsNet, 1)
 
     displacements = plot_displacement_model(realSimData, netTop, displacements, tSave, displacement)
 end

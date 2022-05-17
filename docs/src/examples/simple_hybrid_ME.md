@@ -123,9 +123,9 @@ realFMU = fmiLoad("SpringFrictionPendulum1D", "Dymola", "2022x")
 fmiInfo(realFMU)
 ```
 
-    ┌ Info: fmi2Unzip(...): Successfully unzipped 29 files at `/tmp/fmijl_CVtMld/SpringFrictionPendulum1D`.
+    ┌ Info: fmi2Unzip(...): Successfully unzipped 29 files at `/tmp/fmijl_3qgHqW/SpringFrictionPendulum1D`.
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:75
-    ┌ Info: fmi2Load(...): FMU resources location is `file:////tmp/fmijl_CVtMld/SpringFrictionPendulum1D/resources`
+    ┌ Info: fmi2Load(...): FMU resources location is `file:////tmp/fmijl_3qgHqW/SpringFrictionPendulum1D/resources`
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:190
     ┌ Info: fmi2Load(...): FMU supports both CS and ME, using CS as default if nothing specified.
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:193
@@ -224,7 +224,12 @@ posReal = fmi2GetSolutionValue(realSimData, "mass.s")
 
 
 After extracting the data, the FMU is cleaned-up.
+
+
+```julia
 fmiUnload(realFMU)
+```
+
 ### SimpleFMU
 
 The following lines load, simulate and plot the *simpleFMU* just like the *realFMU*. The differences between both systems can be clearly seen from the plots. In the plot for the *realFMU* it can be seen that the oscillation continues to decrease due to the effect of the friction. If you simulate long enough, the oscillation would come to a standstill in a certain time. The oscillation in the *simpleFMU* behaves differently, since the friction was not taken into account here. The oscillation in this model would continue to infinity with the same oscillation amplitude. From this observation the desire of an improvement of this model arises.     
@@ -268,9 +273,9 @@ fmiPlot(simpleSimData)
     ##################### End information for FMU #####################
 
 
-    ┌ Info: fmi2Unzip(...): Successfully unzipped 29 files at `/tmp/fmijl_GwSGbb/SpringPendulum1D`.
+    ┌ Info: fmi2Unzip(...): Successfully unzipped 29 files at `/tmp/fmijl_9YPxeY/SpringPendulum1D`.
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:75
-    ┌ Info: fmi2Load(...): FMU resources location is `file:////tmp/fmijl_GwSGbb/SpringPendulum1D/resources`
+    ┌ Info: fmi2Load(...): FMU resources location is `file:////tmp/fmijl_9YPxeY/SpringPendulum1D/resources`
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:190
     ┌ Info: fmi2Load(...): FMU supports both CS and ME, using CS as default if nothing specified.
     └ @ FMIImport /home/runner/.julia/packages/FMIImport/S8pFT/src/FMI2_ext.jl:193
@@ -451,35 +456,35 @@ Flux.train!(lossSum, paramsNet, Iterators.repeated((), 300), optim; cb=callb)
 ```
 
     ┌ Info: Loss [1]: 0.7677   Avg displacement in data: 0.87618
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [21]: 0.06826   Avg displacement in data: 0.26126
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [41]: 0.05322   Avg displacement in data: 0.2307
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [61]: 0.04779   Avg displacement in data: 0.21862
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [81]: 0.04434   Avg displacement in data: 0.21058
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [101]: 0.04209   Avg displacement in data: 0.20517
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [121]: 0.04092   Avg displacement in data: 0.20229
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [141]: 0.04032   Avg displacement in data: 0.20079
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [161]: 0.0399   Avg displacement in data: 0.19974
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [181]: 0.03958   Avg displacement in data: 0.19894
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [201]: 0.03933   Avg displacement in data: 0.19832
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [221]: 0.03914   Avg displacement in data: 0.19785
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [241]: 0.03899   Avg displacement in data: 0.19746
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [261]: 0.03887   Avg displacement in data: 0.19715
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [281]: 0.03877   Avg displacement in data: 0.19689
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
 
 
 #### Comparison of the plots
@@ -528,75 +533,75 @@ fig
 ```
 
     ┌ Info: Loss [301]: 0.03868   Avg displacement in data: 0.19666
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [321]: 0.0386   Avg displacement in data: 0.19646
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [341]: 0.03853   Avg displacement in data: 0.19628
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [361]: 0.03846   Avg displacement in data: 0.19611
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [381]: 0.03839   Avg displacement in data: 0.19594
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [401]: 0.03833   Avg displacement in data: 0.19578
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [421]: 0.03826   Avg displacement in data: 0.19561
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [441]: 0.0382   Avg displacement in data: 0.19545
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [461]: 0.03813   Avg displacement in data: 0.19527
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [481]: 0.03806   Avg displacement in data: 0.19509
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [501]: 0.03798   Avg displacement in data: 0.19489
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [521]: 0.0379   Avg displacement in data: 0.19468
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [541]: 0.03781   Avg displacement in data: 0.19446
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [561]: 0.03772   Avg displacement in data: 0.19421
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [581]: 0.03761   Avg displacement in data: 0.19395
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [601]: 0.0375   Avg displacement in data: 0.19365
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [621]: 0.03737   Avg displacement in data: 0.19332
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [641]: 0.03723   Avg displacement in data: 0.19295
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [661]: 0.03706   Avg displacement in data: 0.19252
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [681]: 0.03689   Avg displacement in data: 0.19207
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [701]: 0.03667   Avg displacement in data: 0.1915
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [721]: 0.03644   Avg displacement in data: 0.19089
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [741]: 0.03616   Avg displacement in data: 0.19016
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [761]: 0.03582   Avg displacement in data: 0.18927
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [781]: 0.03542   Avg displacement in data: 0.18819
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [801]: 0.03492   Avg displacement in data: 0.18687
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [821]: 0.03429   Avg displacement in data: 0.18518
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [841]: 0.03348   Avg displacement in data: 0.18297
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [861]: 0.03238   Avg displacement in data: 0.17995
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [881]: 0.03084   Avg displacement in data: 0.17561
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [901]: 0.02854   Avg displacement in data: 0.16893
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [921]: 0.02493   Avg displacement in data: 0.1579
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [941]: 0.01952   Avg displacement in data: 0.13971
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [961]: 0.01307   Avg displacement in data: 0.11433
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
     ┌ Info: Loss [981]: 0.00884   Avg displacement in data: 0.09403
-    └ @ Main In[9]:7
+    └ @ Main In[10]:7
 
 
 
