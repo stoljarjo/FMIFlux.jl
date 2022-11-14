@@ -1,0 +1,2 @@
+[filter "strip-notebook-output"]
+    clean = "jq '.cells[].outputs = [] | .cells[].execution_count = null | .'"
