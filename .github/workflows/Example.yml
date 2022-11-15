@@ -63,3 +63,8 @@ jobs:
           push_options: '--force-with-lease'
           branch: examples
           file_pattern: 'examples/src/*'
+
+  call-docu:
+    needs: sync-files
+    uses: ./.github/workflows/Dokumentation.yml@main
+    secrets: inherit
