@@ -10,7 +10,7 @@ on:
     paths:
       - 'docs/**'
       - 'README.md'
-      - '.github/Documentation.yml'
+      - '.github/workflows/Documentation.yml'
     tags: 
       - '*'
 

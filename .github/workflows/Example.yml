@@ -11,7 +11,7 @@ on:
       - 'src/**'
       - 'examples/src/**'
       - 'examples/Project.toml'
-      - '.github/Example.yml'
+      - '.github/workflows/Example.yml'
       - 'Project.toml'
   
 jobs:
