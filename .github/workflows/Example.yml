@@ -67,5 +67,5 @@ jobs:
 
   call-docu:
     needs: sync-files
-    uses: ./.github/workflows/Dokumentation.yml
+    uses: stoljarjo/FMIFlux.jl/.github/workflows/Dokumentation.yml@update_structure
     secrets: inherit
