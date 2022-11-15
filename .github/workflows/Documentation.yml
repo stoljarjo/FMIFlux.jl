@@ -21,7 +21,8 @@ jobs:
       - name: "Check out repository"
         uses: actions/checkout@v3
         with:
-          ref: main
+          # ref: main
+          ref: update_structure  # only for testing
 
       - name: "Copy examples, readme"
         env:
