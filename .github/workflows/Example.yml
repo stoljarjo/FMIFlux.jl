@@ -67,5 +67,5 @@ jobs:
 
   call-docu:
     needs: sync-files
-    uses: ./.github/workflows/Dokumentation.yml@main
+    uses: ./.github/workflows/Dokumentation.yml
     secrets: inherit
