@@ -62,7 +62,7 @@ jobs:
         with:
           commit_message: Jupyter nbconvert synch - modified, paired .ipynb files
           push_options: '--force-with-lease'
-          branch: examples
+          branch: origin/examples
           file_pattern: 'examples/src/*'
 
   call-docu:
