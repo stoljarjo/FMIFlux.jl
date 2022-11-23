@@ -28,6 +28,8 @@ jobs:
     steps:
       - name: "Check out repository"
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
 
       - name: "Set up Julia"
         uses: julia-actions/setup-julia@v1
@@ -62,7 +64,7 @@ jobs:
         with:
           commit_message: Jupyter nbconvert synch - modified, paired .ipynb files
           push_options: '--force-with-lease'
-          branch: origin/examples
+          branch: examples
           file_pattern: 'examples/src/*'
           skip_checkout: true
 
