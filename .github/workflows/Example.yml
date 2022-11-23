@@ -64,6 +64,7 @@ jobs:
           push_options: '--force-with-lease'
           branch: origin/examples
           file_pattern: 'examples/src/*'
+          skip_checkout: true
 
   call-docu:
     needs: sync-files
