@@ -28,8 +28,8 @@ jobs:
     steps:
       - name: "Check out repository"
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
+        # with:
+        #   ref: ${{ github.ref }}
 
       - name: "Set up Julia"
         uses: julia-actions/setup-julia@v1
@@ -42,21 +42,14 @@ jobs:
 
       - name: "Install packages"
         run: pip install jupyter nbconvert
-
-      - name: "Set path filter"
-        uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          list-files: shell
-          filters: |
-            all:
-              - 'examples/src/**.ipynb'
                         
       - name: "Execute and synchronize all files"
+        env: 
+          FILES: './examples/src/*.ipynb'
         run: |
-          jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute ${{ steps.filter.outputs.all_files }}
-          jupyter nbconvert --to script ${{ steps.filter.outputs.all_files }}
-          jupyter nbconvert --to markdown ${{ steps.filter.outputs.all_files }}
+          jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute $FILES
+          jupyter nbconvert --to script $FILES
+          jupyter nbconvert --to markdown $FILES
       
       - name: "Auto commit"
         if: ${{ matrix.os == 'ubuntu-latest'}}
@@ -65,7 +58,7 @@ jobs:
           commit_message: Jupyter nbconvert synch - modified, paired .ipynb files
           push_options: '--force-with-lease'
           branch: examples
-          file_pattern: 'examples/src/*'
+          file_pattern: 'examples/src/*.svg examples/src/*.md examples/src/*.jl examples/src/*.ipynb'
           skip_checkout: true
 
   call-docu:
