@@ -1,3 +1,0 @@
-[filter "strip-notebook-output"]
-    clean = jq --indent 1 '(.. |."execution_count"? | select(. != null)) = null'
-    smudge = cat

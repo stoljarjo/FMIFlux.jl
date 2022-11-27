@@ -37,10 +37,3 @@ To run Julia as kernel in a jupyter notebook it is necessary to add the **IJulia
 
 
 More information can be found [here](https://towardsdatascience.com/how-to-best-use-julia-with-jupyter-82678a482677).
-
-## Add Git Filter
-
-To apply the Git filter to the notebooks, each user will need to run the following command in the direcotry:  ``FMIFlux.jl/``
-```
-git config --local include.path ../.gitconfig
-```
