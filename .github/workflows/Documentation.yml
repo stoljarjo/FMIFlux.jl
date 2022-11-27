@@ -27,13 +27,13 @@ jobs:
 
       - name: "Copy examples, readme"
         env:
-          WORK_TREE: './docs/src/examples/'
+          WORK_TREE: './docs/src/examples'
           SRC_BRANCH: 'origin/examples'
           SRC_FOLDER_PATH: 'examples/src'
         run: |
           git fetch
           git --work-tree=$WORK_TREE/.. checkout $SRC_BRANCH -- $SRC_FOLDER_PATH/*.md $SRC_FOLDER_PATH/*.svg
-          mv $WORK_TREE/src $WORK_TREE 
+          mv $WORK_TREE/src/* $WORK_TREE 
           rm -r $WORK_TREE/src
           cp ./README.md ./docs/src/index.md
 

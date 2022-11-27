@@ -54,7 +54,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Jupyter nbconvert synch - modified, paired .ipynb files
-          push_options: '--force-with-lease'
+          push_options: ''
           branch: examples
           file_pattern: 'examples/src/*.svg examples/src/*.md examples/src/*.jl examples/src/*.ipynb'
           skip_checkout: true
