@@ -51,13 +51,20 @@ jobs:
       
       - name: "Auto commit"
         if: ${{ matrix.os == 'ubuntu-latest'}}
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Jupyter nbconvert synch - modified, paired .ipynb files
-          push_options: ''
-          branch: examples
-          file_pattern: 'examples/src/*.svg examples/src/*.md examples/src/*.jl examples/src/*.ipynb'
-          skip_checkout: true
+        env: 
+          CI_COMMIT_MESSAGE: Jupyter nbconvert synch - modified, paired .ipynb files
+          CI_COMMIT_AUTHOR: github-actions[bot]
+        run: |
+          git fetch origin examples
+          git stash
+          git checkout examples
+          git stash apply
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "${{ env.CI_COMMIT_AUTHOR }}@users.noreply.github.com"
+          git config --global core.autocrlf false
+          git add examples/src/
+          git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push origin HEAD:examples  
 
   call-docu:
     needs: sync-files
