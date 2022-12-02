@@ -55,9 +55,9 @@ jobs:
           CI_COMMIT_MESSAGE: Jupyter nbconvert synch - modified, paired .ipynb files
           CI_COMMIT_AUTHOR: github-actions[bot]
         run: |
-          git fetch origin examples
+          git fetch
           git stash
-          git checkout examples
+          git switch examples
           git stash apply
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "${{ env.CI_COMMIT_AUTHOR }}@users.noreply.github.com"
