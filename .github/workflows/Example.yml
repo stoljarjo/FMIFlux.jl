@@ -43,9 +43,14 @@ jobs:
       - name: "Install packages"
         run: pip install jupyter nbconvert
                         
+      # - name: "Execute and synchronize all files"
+      #   run: |
+      #     jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute ./examples/src/*.ipynb
+      #     jupyter nbconvert --to script ./examples/src/*.ipynb
+      #     jupyter nbconvert --to markdown ./examples/src/*.ipynb
+
       - name: "Execute and synchronize all files"
         run: |
-          jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute ./examples/src/*.ipynb
           jupyter nbconvert --to script ./examples/src/*.ipynb
           jupyter nbconvert --to markdown ./examples/src/*.ipynb
       
@@ -54,17 +59,19 @@ jobs:
         env: 
           CI_COMMIT_MESSAGE: Jupyter nbconvert synch - modified, paired .ipynb files
           CI_COMMIT_AUTHOR: github-actions[bot]
+          EXAMPLES_PATH: examples/src/*
         run: |
           git fetch
-          git stash
+          git stash --all -- ${{ env.EXAMPLES_PATH }
           git switch examples
-          git stash apply
+          rm -rf ${{ env.EXAMPLES_PATH }
+          git stash pop
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "${{ env.CI_COMMIT_AUTHOR }}@users.noreply.github.com"
           git config --global core.autocrlf false
-          git add examples/src/
+          git add ${{ env.EXAMPLES_PATH }
           git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-          git push origin HEAD:examples  
+          git push origin examples  
 
   call-docu:
     needs: sync-files
