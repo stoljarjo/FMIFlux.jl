@@ -6,11 +6,9 @@ on:
   push:
     branches: 
       - main
-      - update_structure  # only for testing
     paths:
       - 'src/**'
       - 'examples/src/**'
-      - 'examples/Project.toml'
       - '.github/workflows/Example.yml'
       - 'Project.toml'
   
@@ -28,8 +26,6 @@ jobs:
     steps:
       - name: "Check out repository"
         uses: actions/checkout@v3
-        # with:
-        #   ref: ${{ github.ref }}
 
       - name: "Set up Julia"
         uses: julia-actions/setup-julia@v1
@@ -43,14 +39,9 @@ jobs:
       - name: "Install packages"
         run: pip install jupyter nbconvert
                         
-      # - name: "Execute and synchronize all files"
-      #   run: |
-      #     jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute ./examples/src/*.ipynb
-      #     jupyter nbconvert --to script ./examples/src/*.ipynb
-      #     jupyter nbconvert --to markdown ./examples/src/*.ipynb
-
       - name: "Execute and synchronize all files"
         run: |
+          jupyter nbconvert --ExecutePreprocessor.kernel_name="julia-1.6" --to notebook --inplace --execute ./examples/src/*.ipynb
           jupyter nbconvert --to script ./examples/src/*.ipynb
           jupyter nbconvert --to markdown ./examples/src/*.ipynb
       
@@ -75,5 +66,9 @@ jobs:
 
   call-docu:
     needs: sync-files
-    uses: ./.github/workflows/Documentation.yml
-    secrets: inherit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          event-type: trigger-docu

@@ -1,13 +1,14 @@
 name: Documentation
 
 on:
-  workflow_call:
   workflow_dispatch:
+  repository_dispatch:
+    types: [trigger-docu]
+
   pull_request:
   push:
     branches: 
       - main
-      - update_structure  # only for testin
     paths:
       - 'docs/**'
       - 'README.md'
@@ -22,8 +23,7 @@ jobs:
       - name: "Check out repository"
         uses: actions/checkout@v3
         with:
-          # ref: main
-          ref: update_structure  # only for testing
+          ref: main
 
       - name: "Copy examples, readme"
         env:
