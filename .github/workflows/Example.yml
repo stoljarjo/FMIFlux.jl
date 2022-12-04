@@ -57,9 +57,8 @@ jobs:
           git fetch
           git stash --all -- ${{ env.EXAMPLES_PATH }}
           git switch examples
-          rm -rf ${{ env.EXAMPLES_PATH }}
-          git stash pop
-          git checkout --theirs .
+          git checkout stash -- ${{ env.EXAMPLES_PATH }}
+          git stash drop
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "${{ env.CI_COMMIT_AUTHOR }}@users.noreply.github.com"
           git config --global core.autocrlf false
