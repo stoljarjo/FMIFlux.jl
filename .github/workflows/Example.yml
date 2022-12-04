@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: "Check out repository"
         uses: actions/checkout@v3
+        with:
+          ref: main
 
       - name: "Set up Julia"
         uses: julia-actions/setup-julia@v1
@@ -57,6 +59,7 @@ jobs:
           git switch examples
           rm -rf ${{ env.EXAMPLES_PATH }}
           git stash pop
+          git checkout --theirs .
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "${{ env.CI_COMMIT_AUTHOR }}@users.noreply.github.com"
           git config --global core.autocrlf false
