@@ -85,6 +85,7 @@ jobs:
           rm -rf ${{ env.EXAMPLES_PATH }}
           git checkout stash -f -- ${{ env.EXAMPLES_PATH }}
           git stash apply --index
+          git rm examples/Project.toml examples/README.md
           git stash drop
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "${{ env.CI_COMMIT_AUTHOR }}@users.noreply.github.com"
