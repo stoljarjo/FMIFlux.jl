@@ -35,14 +35,14 @@ jobs:
 
       - name: "Copy examples, readme"
         env:
-          WORK_TREE: './docs/src/examples'
+          WORK_TREE: './docs/src'
           SRC_BRANCH: 'origin/examples'
           SRC_FOLDER_PATH: 'examples'
         # copy the examples from the examples branch (.md, .svg) and copy the readme in the docs folder
         run: |
           git fetch
-          git --work-tree=$WORK_TREE/.. checkout $SRC_BRANCH -- $SRC_FOLDER_PATH\*.md $SRC_FOLDER_PATH\*.svg
-          cp ./README.md ./docs/src/index.md
+          git --work-tree=$WORK_TREE checkout $SRC_BRANCH -- $SRC_FOLDER_PATH\*.md $SRC_FOLDER_PATH\*.svg
+          cp ./README.md $WORK_TREE/index.md
 
       - name: "Install dependencies"
         run: julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
