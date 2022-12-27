@@ -7,6 +7,7 @@
 [![Dev Docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://ThummeTo.github.io/FMIFlux.jl/dev) 
 [![Run Tests](https://github.com/ThummeTo/FMIFlux.jl/actions/workflows/Test.yml/badge.svg)](https://github.com/ThummeTo/FMIFlux.jl/actions/workflows/Test.yml)
 [![Run Examples](https://github.com/ThummeTo/FMIFlux.jl/actions/workflows/Example.yml/badge.svg)](https://github.com/ThummeTo/FMIFlux.jl/actions/workflows/Example.yml)
+[![Run PkgEval](https://github.com/ThummeTo/FMIFlux.jl/actions/workflows/Eval.yml/badge.svg)](https://github.com/ThummeTo/FMIFlux.jl/actions/workflows/Eval.yml)
 [![Build Docs](https://github.com/ThummeTo/FMIFlux.jl/actions/workflows/Documentation.yml/badge.svg)](https://github.com/ThummeTo/FMIFlux.jl/actions/workflows/Documentation.yml)
 [![Coverage](https://codecov.io/gh/ThummeTo/FMIFlux.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/ThummeTo/FMIFlux.jl)
 [![ColPrac: Contributor's Guide on Collaborative Practices for Community Packages](https://img.shields.io/badge/ColPrac-Contributor's%20Guide-blueviolet)](https://github.com/SciML/ColPrac)
