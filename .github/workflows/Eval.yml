@@ -1,4 +1,4 @@
-name: Run FMICore.jl eval
+name: Run PkgEval
 
 on: 
   workflow_dispatch:
